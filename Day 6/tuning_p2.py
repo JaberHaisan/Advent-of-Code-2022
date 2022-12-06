@@ -14,6 +14,7 @@ for i, char in enumerate(chars, 1):
 	# that all characters in sub_str are unique
 	if i >= unique_char_num + 1 and len(set(sub_str)) == unique_char_num:
 		print("".join(sub_str))
+		print(i)
 		break
 
-print(i)
+
