@@ -16,5 +16,5 @@ for i, char in enumerate(chars, 1):
 		print("".join(sub_str))
 		print(i)
 		break
-
-
+else:
+	print("No matches found.")
