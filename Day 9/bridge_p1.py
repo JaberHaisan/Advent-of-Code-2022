@@ -44,7 +44,7 @@ def move_tail(head, tail):
 	if abs(x_diff) == 2 and y_diff == 0:
 		tail.x += x_diff // 2
 	
-	# Head is 2 steps to the up or down from the tail.
+	# Head is 2 steps up or down from the tail.
 	elif abs(y_diff) == 2 and x_diff == 0:
 		tail.y += y_diff // 2
 	
