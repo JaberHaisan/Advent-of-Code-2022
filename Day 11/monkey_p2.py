@@ -9,6 +9,8 @@ with open("input.txt") as f_obj:
 	# Separate lines to lists of description of each monkey
 	for i in range(0, len(lines), 7):
 		all_monkey_desc.append(lines[i:i + 6])
+		
+ops = { "+": operator.add, "*": operator.mul}
 
 @dataclass
 class Monkey():
@@ -43,8 +45,6 @@ class Monkey():
 	def take(self, item):
 		"""Adds an item to items."""
 		self.items.append(item)
-
-ops = { "+": operator.add, "*": operator.mul}
 
 monkeys = {}
 for monkey_desc in all_monkey_desc:
