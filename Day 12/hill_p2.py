@@ -54,7 +54,7 @@ for row, line in enumerate(lines):
 
 
 # x and y are letters. The function checks their pos in letters
-# and returns true if pos(y) is below or equal to pos(x + 1)
+# and returns true if pos(y) is below or equal to pos(x) + 1
 comp_letters = lambda x, y: letters.find(y) <= letters.find(x) + 1
 
 # Determine neigbours of each node
