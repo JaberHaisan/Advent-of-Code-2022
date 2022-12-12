@@ -30,24 +30,28 @@ class Node():
 		self.distance = float("inf")
 		
 nodes = {}
-starts = []
+ends = []
+
+letters = string.ascii_lowercase
+
+# Returns opposite letter. 
+reverse = lambda x: letters[len(letters) - letters.find(x) - 1]
 
 # Create nodes from data
 for row, line in enumerate(lines):
 	for col, letter in enumerate(line):
 		if letter == "S" or letter == "a":
-			start = Node("a", row, col)
-			nodes[(row, col)] = start
-			starts.append(start)
-			
-		elif letter == "E":
 			end = Node("z", row, col)
 			nodes[(row, col)] = end
+			ends.append(end)
+			
+		elif letter == "E":
+			start = Node("a", row, col)
+			nodes[(row, col)] = start
 			
 		else:
-			nodes[(row, col)] = Node(letter, row, col)
+			nodes[(row, col)] = Node(reverse(letter), row, col)
 
-letters = string.ascii_lowercase
 
 # x and y are letters. The function checks their pos in letters
 # and returns true if pos(y) is below or equal to pos(x + 1)
@@ -68,26 +72,18 @@ for (row, col), node in nodes.items():
 	if (row, col + 1) in nodes and comp_letters(node.letter, nodes[(row, col + 1)].letter):
 		node.add_neighbour(nodes[(row, col + 1)])
 
-min_distance = float("inf")
-for start in starts:
-	# Use BFS to find shortest distance
-	Q = deque()
-	start.distance = 0
-	Q.append(start)
+# Use BFS to find shortest distance
+Q = deque()
+start.distance = 0
+Q.append(start)
 
-	while len(Q) != 0:
-		u = Q.popleft()
-		for neighbour in u.neighbours:
-			# Undiscovered node
-			if neighbour.distance == float("inf"):
-				neighbour.distance = u.distance + 1
-				neighbour.predec = u
-				Q.append(neighbour)
-			
-	min_distance = min(min_distance, end.distance)
-	
-	# Reset all nodes for next BFS
-	for node in nodes.values():
-		node.reset()
-		
-print(min_distance)
+while len(Q) != 0:
+	u = Q.popleft()
+	for neighbour in u.neighbours:
+		# Undiscovered node
+		if neighbour.distance == float("inf"):
+			neighbour.distance = u.distance + 1
+			neighbour.predec = u
+			Q.append(neighbour)
+
+print(min(end.distance for end in ends))
