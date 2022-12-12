@@ -80,7 +80,7 @@ Q.append(start)
 while len(Q) != 0:
 	u = Q.popleft()
 	for neighbour in u.neighbours:
-		# Undiscovered node
+		# Check if it is an undiscovered node
 		if neighbour.distance == float("inf"):
 			neighbour.distance = u.distance + 1
 			neighbour.predec = u
